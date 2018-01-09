@@ -2,8 +2,6 @@
  *
  * Copyright 2014 Aaron P. Dahlen 
  *
- *     APDahlen@gmail.com (mailto:APDahlen@gmail.com)
- *
  * This program is free software: you can redistribute it and/or modify it under the terms
  * of the GNU General Public License as published by the Free Software Foundation, either
  * version 3 of the License, or (at your option) any later version.
@@ -16,10 +14,10 @@
  * If not, see <Licenses - GNU Project - Free Software Foundation (http://www.gnu.org/licenses/)>.
  */
 
-/**@Warning - this code breaks if you use any timer-2 functions such as tone.
+/* @Warning - this code breaks if you use any timer-2 functions such as tone.
  *
- * @Warning - there is a bug between the timer ISR and the Arduino analogWrite
- * function.  If you need to use the PWM from within the ISR then use the "fast PWM"
+ * @Warning - there is a bug between the timer ISR and the Arduino analogWrite function.  If you 
+ * need to use the PWM from within the ISR then use the "fast PWM"
  * 
  *
  * Arduino - SecretsOfArduinoPWM (http://arduino.cc/en/Tutorial/SecretsOfArduinoPWM)
