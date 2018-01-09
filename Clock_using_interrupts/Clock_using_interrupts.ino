@@ -51,7 +51,6 @@
  */
 
 
-
 // AVR GCC libraries for more information see:
 //     avr-libc: Modules (http://www.nongnu.org/avr-libc/user-manual/modules.html)
 //     The GNU C Library (https://www.gnu.org/software/libc/manual/)
@@ -62,26 +61,22 @@
     #include <string.h>
     #include <ctype.h>
 
+// Alias
+
+    #define LED_PIN 13
+    #define F_CLK 16000000L
 
 // Project specific includes
-
 
 // Global variables
 
 
-
-
 void setup(){
 
-    digitalWrite(K1_PIN, LOW);
-
-    USART_set_terminator(LINE_TERMINATOR);
-
+    pinMode(LED_PIN, OUTPUT);
+   
     init_timer_1_CTC(100);                          // Enable the timer ISR
-
-
 }
-
 
 
 /*********************************************************************************
@@ -93,8 +88,6 @@ void setup(){
  * |_|     \____/ |_|  \_\|______|\_____||_|  \_\ \____/  \____/ |_| \_||_____/
  *
  ********************************************************************************/
-
-
 
 ISR(TIMER1_COMPA_vect){
 
@@ -109,22 +102,17 @@ ISR(TIMER1_COMPA_vect){
  *    3) Status and used registers are popped by compiler generated code.
  */
 
-    static uint8_t LED_flag;
-    static uint16_t time_in_state = 0;
+    static uint8_t LED_shadow;
+    static uint8_t time_in_state = 0;
 
-
-
-
-
-
-
-
-    //  INSERT one second LED blink code here...
-
-
-
-
-
+    time_in_state++;
+   
+    if (time_in_state > 50){
+        time_in_state = 0;
+        LED_shadow = !LED_shadow;
+    }
+    
+    digitalWrite(LED_PIN, LED_shadow);
 
 }
 
@@ -140,10 +128,13 @@ ISR(TIMER1_COMPA_vect){
  ********************************************************************************/
 
 void loop(){
+  
+  // Nothing to see here...
 
 }
 
 
+/********************************************************************************/
 
 void init_timer_1_CTC(long desired_ISR_freq){
 /**
